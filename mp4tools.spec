@@ -2,7 +2,7 @@
 
 Name:           mp4tools
 Version:        3.5
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A free cross-platform tool to manipulate MP4 files
 License:        GPLv2
 URL:            http://www.mp4joiner.org
@@ -15,9 +15,10 @@ BuildRequires:  desktop-file-utils
 BuildRequires:  ffmpeg
 BuildRequires:  ffmpeg-devel
 BuildRequires:  gettext-devel
-BuildRequires:  gpac
+BuildRequires:  gpac-devel
 BuildRequires:  wxsvg-devel
 Requires:       ffmpeg
+Requires:       gpac
 
 
 %description
@@ -98,6 +99,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/mp4splitter.desktop
 %{_datadir}/pixmaps/mp4splitter.png
 
 %changelog
+* Tue Jan 09 2018 Martin Gansser <martinkg@fedoraproject.org> - 3.5-4
+- Add RR gpac
+
 * Thu Oct 12 2017 Martin Gansser <martinkg@fedoraproject.org> - 3.5-3
 - COPYING file does not report a GPLv3 license, use GPLv2
 - Do not use %%license and %%{_pkgdocdir} together
