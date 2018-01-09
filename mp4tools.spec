@@ -15,7 +15,7 @@ BuildRequires:  desktop-file-utils
 BuildRequires:  ffmpeg
 BuildRequires:  ffmpeg-devel
 BuildRequires:  gettext-devel
-BuildRequires:  gpac-devel
+BuildRequires:  gpac
 BuildRequires:  wxsvg-devel
 Requires:       ffmpeg
 Requires:       gpac
