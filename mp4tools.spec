@@ -1,12 +1,12 @@
 %global pname   MP4Tools
 
 Name:           mp4tools
-Version:        3.5
-Release:        8%{?dist}
+Version:        3.6.1
+Release:        1%{?dist}
 Summary:        A free cross-platform tool to manipulate MP4 files
 License:        GPLv2
 URL:            http://www.mp4joiner.org
-Source0:        http://app.oldfoss.com:81/download/MP4Joiner/%{pname}-%{version}.tar.bz2
+Source0:        https://sourceforge.net/projects/mp4joiner/files/%{pname}/%{version}/%{pname}-%{version}.tar.bz2
 # fedora specific patch
 Patch0:         %{name}-wx-config.patch
 
@@ -99,6 +99,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/mp4splitter.desktop
 %{_datadir}/pixmaps/mp4splitter.png
 
 %changelog
+* Fri Jul 27 2018 Martin Gansser <martinkg@fedoraproject.org> - 3.6.1-1
+- Update to 3.6.1
+
 * Fri Jul 27 2018 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 3.5-8
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
