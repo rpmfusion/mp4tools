@@ -1,8 +1,8 @@
 %global pname   MP4Tools
 
 Name:           mp4tools
-Version:        3.6.1
-Release:        2%{?dist}
+Version:        3.7
+Release:        1%{?dist}
 Summary:        A free cross-platform tool to manipulate MP4 files
 License:        GPLv2
 URL:            http://www.mp4joiner.org
@@ -10,7 +10,12 @@ Source0:        https://sourceforge.net/projects/mp4joiner/files/%{pname}/%{vers
 # fedora specific patch
 Patch0:         %{name}-wx-config.patch
 
+BuildRequires:  gcc gcc-c++
+%if 0%{?fedora} < 30
 BuildRequires:  compat-wxGTK3-gtk2-devel
+%else
+BuildRequires:  wxGTK3-devel
+%endif
 BuildRequires:  desktop-file-utils
 BuildRequires:  ffmpeg
 BuildRequires:  ffmpeg-devel
@@ -30,7 +35,10 @@ files
 
 
 %prep
-%autosetup -n %{pname}-%{version}
+%setup -q -n %{pname}-%{version}
+%if 0%{?fedora} < 28
+%patch0 -p0
+%endif
 
 %build
 
@@ -99,6 +107,11 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/mp4splitter.desktop
 %{_datadir}/pixmaps/mp4splitter.png
 
 %changelog
+* Wed Dec 26 2018 Martin Gansser <martinkg@fedoraproject.org> - 3.7.1-1
+- Update to 3.7.1
+- Add BR gcc gcc-c++
+- Add BR wxGTK3-devel for Fedora >= 30
+
 * Sun Aug 19 2018 Leigh Scott <leigh123linux@googlemail.com> - 3.6.1-2
 - Rebuilt for Fedora 29 Mass Rebuild binutils issue
 
