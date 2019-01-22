@@ -2,7 +2,7 @@
 
 Name:           mp4tools
 Version:        3.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A free cross-platform tool to manipulate MP4 files
 License:        GPLv2
 URL:            http://www.mp4joiner.org
@@ -11,11 +11,7 @@ Source0:        https://sourceforge.net/projects/mp4joiner/files/%{pname}/%{vers
 Patch0:         %{name}-wx-config.patch
 
 BuildRequires:  gcc gcc-c++
-%if 0%{?fedora} < 30
-BuildRequires:  compat-wxGTK3-gtk2-devel
-%else
 BuildRequires:  wxGTK3-devel
-%endif
 BuildRequires:  desktop-file-utils
 BuildRequires:  ffmpeg
 BuildRequires:  ffmpeg-devel
@@ -36,19 +32,10 @@ files
 
 %prep
 %setup -q -n %{pname}-%{version}
-%if 0%{?fedora} < 28
-%patch0 -p0
-%endif
 
 %build
-
-%configure \
-%if (0%{?fedora} && 0%{?fedora} < 28)
- --with-wx-config=%{_bindir}/wx-config-3.0-gtk2
-%endif
-
+%configure
 %make_build
-
 
 %install
 %make_install
@@ -86,7 +73,6 @@ install -m 644 resources/mp4splitter.png \
 %{buildroot}%{_datadir}/pixmaps/mp4splitter.png
 # remove not relevant file
 rm -f %{buildroot}%{_docdir}/%{name}/INSTALL
-
 rm -f %{buildroot}%{_pkgdocdir}/COPYING
 
 
@@ -107,6 +93,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/mp4splitter.desktop
 %{_datadir}/pixmaps/mp4splitter.png
 
 %changelog
+* Tue Jan 22 2019 Martin Gansser <martinkg@fedoraproject.org> - 3.7.1-2
+- Rebuilt
+
 * Wed Dec 26 2018 Martin Gansser <martinkg@fedoraproject.org> - 3.7.1-1
 - Update to 3.7.1
 - Add BR gcc gcc-c++
