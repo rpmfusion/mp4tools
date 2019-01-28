@@ -1,15 +1,39 @@
+#For git snapshots, set to 0 to use release instead:
+%global usesnapshot 0
+%if 0%{?usesnapshot}
+%global commit0 da0dff96a563fb8b09f2a2a78a0aa97b8af47ff2
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%global snapshottag .git%{shortcommit0}
+%endif
 %global pname   MP4Tools
 
 Name:           mp4tools
+%if 0%{?usesnapshot}
+Version:        3.8
+Release:        1.beta3%{?snapshottag}%{?dist}
+%else
 Version:        3.7
-Release:        2%{?dist}
+Release:        3%{?dist}
+%endif
 Summary:        A free cross-platform tool to manipulate MP4 files
 License:        GPLv2
 URL:            http://www.mp4joiner.org
+
+# checkout instructions
+# git clone git://git.code.sf.net/p/mp4joiner/git mp4tools
+# cd mp4tools
+# git rev-parse --short HEAD
+# git archive --format=tar --prefix=mp4tools/ %%{shortcommit0} \
+#   -o mp4tools-%%{shortcommit0}.tar
+# bzip2 mp4tools-%%{shortcommit0}.tar
+
+%if 0%{?usesnapshot}
+Source0:        %{name}-%{shortcommit0}.tar.bz2
+%else
 Source0:        https://sourceforge.net/projects/mp4joiner/files/%{pname}/%{version}/%{pname}-%{version}.tar.bz2
+%endif
 # fedora specific patch
 Patch0:         %{name}-wx-config.patch
-
 BuildRequires:  gcc gcc-c++
 BuildRequires:  wxGTK3-devel
 BuildRequires:  desktop-file-utils
@@ -21,7 +45,6 @@ BuildRequires:  wxsvg-devel
 Requires:       ffmpeg
 Requires:       gpac
 
-
 %description
 MP4Tools is a collection of cross-platform free tools to manipulate MP4 files.
 It contains following applications:
@@ -29,11 +52,18 @@ It contains following applications:
 ⦁ MP4Splitter is a free application that allows split a MP4 file in multiple
 files
 
-
 %prep
+%if 0%{?usesnapshot}
+%setup -q -n %{name}
+%else
 %setup -q -n %{pname}-%{version}
+%endif
 
 %build
+
+if [ ! -f configure ]; then
+NOCONFIGURE=1 ./autogen.sh
+fi
 %configure
 %make_build
 
@@ -75,7 +105,6 @@ install -m 644 resources/mp4splitter.png \
 rm -f %{buildroot}%{_docdir}/%{name}/INSTALL
 rm -f %{buildroot}%{_pkgdocdir}/COPYING
 
-
 %find_lang %name
 
 %check
@@ -93,6 +122,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/mp4splitter.desktop
 %{_datadir}/pixmaps/mp4splitter.png
 
 %changelog
+* Mon Jan 28 2019 Martin Gansser <martinkg@fedoraproject.org> - 3.7.1-3
+- Rebuilt for wxsvg-1.5.16
+
 * Tue Jan 22 2019 Martin Gansser <martinkg@fedoraproject.org> - 3.7.1-2
 - Rebuilt
 
