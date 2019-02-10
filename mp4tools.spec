@@ -6,6 +6,7 @@
 %global snapshottag .git%{shortcommit0}
 %endif
 %global pname   MP4Tools
+%global wxsvg_ver 1.5.16
 
 Name:           mp4tools
 %if 0%{?usesnapshot}
@@ -13,7 +14,7 @@ Version:        3.8
 Release:        1.beta3%{?snapshottag}%{?dist}
 %else
 Version:        3.7
-Release:        4%{?dist}
+Release:        5%{?dist}
 %endif
 Summary:        A free cross-platform tool to manipulate MP4 files
 License:        GPLv2
@@ -41,7 +42,8 @@ BuildRequires:  ffmpeg
 BuildRequires:  ffmpeg-devel
 BuildRequires:  gettext-devel
 BuildRequires:  gpac
-BuildRequires:  wxsvg-devel >= 1.5.16
+BuildRequires:  wxsvg-devel >= %{wxsvg_ver}
+Requires:       wxsvg >= %{wxsvg_ver}
 Requires:       ffmpeg
 Requires:       gpac
 
@@ -122,6 +124,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/mp4splitter.desktop
 %{_datadir}/pixmaps/mp4splitter.png
 
 %changelog
+* Sun Feb 10 2019 Martin Gansser <martinkg@fedoraproject.org> - 3.7.1-5
+- Add RR wxsvg-1.5.16 fixes (rfbz#5166).
+
 * Tue Jan 29 2019 Martin Gansser <martinkg@fedoraproject.org> - 3.7.1-4
 - Rebuilt for wxsvg-1.5.16
 
