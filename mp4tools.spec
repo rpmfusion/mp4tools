@@ -6,15 +6,15 @@
 %global snapshottag .git%{shortcommit0}
 %endif
 %global pname   MP4Tools
-%global wxsvg_ver 1.5.16
+%global wxsvg_ver 1.5.22
 
 Name:           mp4tools
 %if 0%{?usesnapshot}
 Version:        3.8
 Release:        4.beta3%{?snapshottag}%{?dist}
 %else
-Version:        3.7
-Release:        8%{?dist}
+Version:        3.8
+Release:        1%{?dist}
 %endif
 Summary:        A free cross-platform tool to manipulate MP4 files
 License:        GPLv2
@@ -124,6 +124,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/mp4splitter.desktop
 %{_datadir}/pixmaps/mp4splitter.png
 
 %changelog
+* Thu Apr 16 2020 Martin Gansser <martinkg@fedoraproject.org> - 3.8.1-1
+- Update to 3.8.1
+
 * Wed Feb 05 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 3.7-8
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
