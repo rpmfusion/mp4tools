@@ -11,10 +11,10 @@
 Name:           mp4tools
 %if 0%{?usesnapshot}
 Version:        3.8
-Release:        4.beta3%{?snapshottag}%{?dist}
+Release:        5.beta3%{?snapshottag}%{?dist}
 %else
 Version:        3.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 %endif
 Summary:        A free cross-platform tool to manipulate MP4 files
 License:        GPLv2
@@ -124,6 +124,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/mp4splitter.desktop
 %{_datadir}/pixmaps/mp4splitter.png
 
 %changelog
+* Tue Aug 18 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 3.8-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Thu Apr 16 2020 Martin Gansser <martinkg@fedoraproject.org> - 3.8.1-1
 - Update to 3.8.1
 
