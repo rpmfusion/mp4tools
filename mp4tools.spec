@@ -11,10 +11,10 @@
 Name:           mp4tools
 %if 0%{?usesnapshot}
 Version:        3.8
-Release:        10.beta3%{?snapshottag}%{?dist}
+Release:        11.beta3%{?snapshottag}%{?dist}
 %else
 Version:        3.8
-Release:        7%{?dist}
+Release:        8%{?dist}
 %endif
 Summary:        A free cross-platform tool to manipulate MP4 files
 License:        GPLv2
@@ -35,8 +35,8 @@ Source0:        https://sourceforge.net/projects/mp4joiner/files/%{pname}/%{vers
 %endif
 # fedora specific patch
 Patch0:         %{name}-wx-config.patch
-BuildRequires:  gcc gcc-c++
-BuildRequires:  wxGTK3-devel
+BuildRequires:  gcc-c++
+BuildRequires:  wxGTK-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  ffmpeg
 BuildRequires:  ffmpeg-devel
@@ -124,6 +124,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/mp4splitter.desktop
 %{_datadir}/pixmaps/mp4splitter.png
 
 %changelog
+* Tue Aug 23 2022 Sérgio Basto <sergio@serjux.com> - 3.8-8
+- Rebuild with wxWidgets 3.2
+
 * Sun Aug 07 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3.8-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
